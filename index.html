@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAUSA - Antes de apostar, hacé una pausa</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAVBAR PERMANENTE (STICKY HEADER) -->
+  <header class="navbar">
+    <div class="nav-brand">
+      <img src="/img/imagen (7).png alt="PAUSA Logo" class="nav-logo">
+      <div class="brand-info">
+        <span class="brand-name">PAUSA</span>
+        <span class="brand-tagline">Antes de apostar, hacé una pausa.</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <button class="nav-btn" onclick="scrollToSection('nivel2')">Módulos</button>
+      <button class="nav-btn" onclick="scrollToSection('chat-section')">Asistente IA</button>
+      <button class="btn-gabinete-sticky" onclick="openModal()">🆘 Asistencia Escolar</button>
+    </div>
+  </header>
+
+  <main class="main-layout">
+
+    <!-- HERO / PORTADA (NIVEL 1) -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <span class="badge-tag">Plataforma Web Preventiva</span>
+        <h1 class="hero-title">PAUSA</h1>
+        <p class="hero-subtitle">PREVENÍ. INFORMATE. ELEGÍ.</p>
+        <p class="hero-description">
+          Un espacio diseñado para acompañarte, brindarte herramientas de autogestión de impulsos frente a las apuestas digitales y ofrecerte orientación confidencial.
+        </p>
+        <div class="hero-buttons">
+          <button class="btn-primary" onclick="scrollToSection('chat-section')">💬 Hablar con el Asistente IA</button>
+          <button class="btn-secondary" onclick="openModal()">📩 Contactar al Gabinete</button>
+        </div>
+      </div>
+      <div class="hero-image-container">
+        <img src="/img/imagen (7).png" alt="PAUSA Logo Oficial" class="hero-logo-img">
+      </div>
+    </section>
+
+    <!-- CATEGORÍAS DEL PROBLEMA (NIVEL 2) -->
+    <section id="nivel2" class="section-container">
+      <div class="section-header">
+        <h2>Módulos de Reflexión y Educación</h2>
+        <p>Elegí una opción para profundizar o evaluar tus impulsos</p>
+      </div>
+
+      <div class="cards-grid">
+        <!-- Módulo 2.1 -->
+        <div class="card-item">
+          <div class="card-icon">⏸️</div>
+          <h3>2.1 Módulo "Hacé una Pausa"</h3>
+          <p>Herramienta rápida de autoevaluación y reflexión para frenar el impulso automático antes de ingresar dinero en un casino virtual.</p>
+          <button class="card-btn" onclick="sendPromptToAI('Quiero reflexionar antes de apostar')">Hacer una pausa ahora</button>
+        </div>
+
+        <!-- Módulo 2.2 -->
+        <div class="card-item">
+          <div class="card-icon">🧠</div>
+          <h3>2.2 Entendiendo la Persuasión</h3>
+          <p>Conocé cómo funcionan los algoritmos de recompensa inmediata y trucos visuales diseñados para generar enganche emocional.</p>
+          <button class="card-btn" onclick="sendPromptToAI('¿Cómo funcionan los trucos de los casinos online?')">Entender trucos</button>
+        </div>
+
+        <!-- Módulo 2.3 -->
+        <div class="card-item">
+          <div class="card-icon">🛡️</div>
+          <h3>2.3 Consecuencias y Recursos</h3>
+          <p>Impacto emocional, económico y alternativas saludables para disfrutar tu tiempo sin riesgos digitales.</p>
+          <button class="card-btn" onclick="sendPromptToAI('¿Qué alternativas saludables existen frente a las apuestas?')">Ver alternativas</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- DASHBOARD DE CHATBOT CON IA (PANTALLA AMPLIA) -->
+    <section id="chat-section" class="section-container">
+      <div class="chat-wrapper">
+        <div class="chat-header">
+          <div class="chat-status">
+            <span class="status-dot"></span>
+            <div>
+              <strong>Agente de IA PAUSA</strong>
+              <small>Respuestas cortas, concisas y en vivo</small>
+            </div>
+          </div>
+          <span class="confidential-badge">100% Anónimo</span>
+        </div>
+
+        <div class="chat-body" id="chatBody">
+          <div class="msg-box bot-msg">
+            👋 ¡Hola! Soy el **Agente de IA de PAUSA**.<br><br>
+            Podés preguntarme sobre cualquier tema (prevención de juego, impulsos, dudas generales o charla libre). Respondo siempre en oraciones cortas y directas para ayudarte sin rodeos.<br><br>
+            ¿En qué te puedo acompañar hoy?
+          </div>
+        </div>
+
+        <div class="typing-indicator" id="typingIndicator">🤖 La IA está redactando la respuesta...</div>
+
+        <div class="chat-input-bar">
+          <input type="text" id="userInput" placeholder="Escribí tu consulta acá..." onkeypress="handleEnter(event)">
+          <button class="send-btn" onclick="processUserText()">Enviar</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL / FORMULARIO ANÓNIMO (NIVEL 3) -->
+  <div class="modal-overlay" id="modalGabinete">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>📩 Mensaje Anónimo al Gabinete</h3>
+        <button class="close-btn" onclick="closeModal()">✕</button>
+      </div>
+      <p class="modal-desc">
+        Tu consulta llegará de manera confidencial al Gabinete Psicopedagógico de la escuela. No necesitas colocar tu nombre real.
+      </p>
+      <div class="form-group">
+        <label for="aliasInput">Alias o apodo (Opcional):</label>
+        <input type="text" id="aliasInput" placeholder="Ej: Estudiante4">
+
+        <label for="messageInput">Tu mensaje confidencial:</label>
+        <textarea id="messageInput" rows="4" placeholder="Escribí lo que estás pasando o tu duda..."></textarea>
+      </div>
+      <button class="submit-btn" onclick="submitGabineteForm()">Enviar mensaje seguro</button>
+    </div>
+  </div>
+
+  <footer class="site-footer">
+    <div class="footer-content">
+      <p>PAUSA © 2026 - Proyecto de Prevención de Apuestas Digitales.</p>
+      <p><small>Garantizamos confidencialidad y anonimato total.</small></p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
